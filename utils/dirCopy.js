@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-export function CopyDirToSrc(sourceDir, targetDir) {
+export function copyDirToSrc(sourceDir, targetDir) {
   // 获取源文件夹下的所有文件和文件夹
   fs.readdir(sourceDir, (err, files) => {
     if (err) {

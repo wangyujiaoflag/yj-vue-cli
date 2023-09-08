@@ -9,11 +9,12 @@ import inquirer from "inquirer";
 import download from "download-git-repo";
 import chalk from "chalk";
 import ora from "ora";
+import figlet from "figlet";
 
 // 项目中导入
 import {
-  InstallNodeModules,
-  AddDynamicTemplate,
+  installNodeModules,
+  addDynamicTemplate,
   question,
 } from "../utils/baseAction.js";
 
@@ -32,7 +33,7 @@ export default () => {
         const {
           // store, router, ts,
           description,
-          repositoryName = name,
+          homepage,
           cssStyle,
           ui,
         } = res;
@@ -41,19 +42,14 @@ export default () => {
         const packagePath = path.join(projectPath, "package.json");
         const repository = {
             type: "git",
-            url: `git+https://github.com/wangyujiaoflag/${repositoryName}.git`,
+            url: `${homepage}.git`,
           },
-          homepage = `https://github.com/wangyujiaoflag/${repositoryName}`,
           bugs = {
-            url: `https://github.com/wangyujiaoflag/${repositoryName}/issues`,
-          },
-          author = {
-            name: "wangyujiaoflag",
-            url: "https://github.com/wangyujiaoflag",
+            url: `${homepage}/issues`,
           };
 
         // 模版下载
-        const loading = ora("template downloading...");
+        const loading = ora(chalk.green.bold("template downloading..."));
         loading.start();
         download(`wangyujiaoflag/vue3-template`, projectPath, async (err) => {
           if (!err) {
@@ -69,7 +65,6 @@ export default () => {
               repository,
               homepage,
               bugs,
-              author,
             });
 
             fs.writeFileSync(
@@ -88,20 +83,35 @@ export default () => {
                 "cssStyle",
                 `${cssStyle}`
               );
-              AddDynamicTemplate(currentDirectory, projectPath);
+              addDynamicTemplate(currentDirectory, projectPath);
             }
             if (ui) {
               const currentDirectory = path.join(templatePath, "ui", `${ui}`);
-              AddDynamicTemplate(currentDirectory, projectPath);
+              addDynamicTemplate(currentDirectory, projectPath);
             }
 
             const time = (new Date().getTime() - beginTime) / 1000;
+
             console.log(
-              chalk.green(`\ndownload project template finish in ${time}s`)
+              chalk.bold(
+                figlet.textSync("YJ VUE CLI", {
+                  font: "Star Wars",
+                  horizontalLayout: "default",
+                  verticalLayout: "default",
+                  width: 100,
+                  whitespaceBreak: true,
+                })
+              )
+            );
+
+            console.log(
+              chalk.green(
+                `\n 🌟🌟🌟download project template finish in ${time}s.\n`
+              )
             );
 
             // 项目创建完成之后 依赖包选择
-            InstallNodeModules(projectPath);
+            installNodeModules(projectPath);
           } else {
             loading.stop();
             console.error(err);

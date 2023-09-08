@@ -6,10 +6,10 @@ import path from "path";
 import fs from "fs";
 
 import deepMerge from "./deepMerge.js";
-import { CopyDirToSrc } from "./dirCopy.js";
+import { copyDirToSrc } from "./dirCopy.js";
 
 // 下载项目依赖包
-export const InstallNodeModules = (projectPath) => {
+export const installNodeModules = (projectPath) => {
   inquirer
     .prompt([
       {
@@ -32,7 +32,7 @@ export const InstallNodeModules = (projectPath) => {
           ])
           .then(({ packageManage }) => {
             const projectInstall = ora(
-              `start use ${packageManage} to install...`
+              chalk.green.bold(`start use ${packageManage} to install...`)
             );
             const command =
               packageManage === "yarn" ? "yarn" : `${packageManage} install`;
@@ -51,9 +51,6 @@ export const InstallNodeModules = (projectPath) => {
               }
 
               projectInstall.succeed();
-
-              console.log(chalk.green("正在为您打开项目"));
-              exec(`code ${projectPath}`);
             });
           });
       }
@@ -62,7 +59,7 @@ export const InstallNodeModules = (projectPath) => {
 
 // TODO: 不太灵活，不完美，很受限制，不易拓展
 // 动态更新模版  需要注意文件的读写操作是异步的！！！
-export const AddDynamicTemplate = (currentDirectory, projectPath, type) => {
+export const addDynamicTemplate = (currentDirectory, projectPath, type) => {
   // 读取当前目录下的所有文件
   fs.readdir(currentDirectory, (err, files) => {
     if (err) {
@@ -97,7 +94,7 @@ export const AddDynamicTemplate = (currentDirectory, projectPath, type) => {
         }
       } else {
         // 写到项目src同名目录下
-        CopyDirToSrc(file, path.join(projectPath, "src"));
+        copyDirToSrc(file, path.join(projectPath, "src"));
       }
     });
   });
@@ -113,8 +110,8 @@ export const question = [
   },
   {
     type: "input",
-    message: "git仓库名称",
-    name: "repositoryName",
+    message: "project homepage of git",
+    name: "homepage",
     default: "",
   },
   {
