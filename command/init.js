@@ -94,7 +94,7 @@ export default () => {
 
             console.log(
               chalk.bold(
-                figlet.textSync("YJ VUE CLI", {
+                figlet.textSync("bgu VUE CLI", {
                   font: "Star Wars",
                   horizontalLayout: "default",
                   verticalLayout: "default",
