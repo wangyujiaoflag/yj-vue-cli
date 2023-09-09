@@ -4,14 +4,14 @@
   "description": "vue 脚手架",
   "type": "module",
   "bin": {
-    "yj": "./bin/index.js"
+    "bgu": "./bin/index.js"
   },
   "scripts": {
     "test": "node index.js"
   },
   "keywords": [
-    "yj-vue-cli",
-    "yj",
+    "bgu-vue-cli",
+    "bgu",
     "cli",
     "vue-cli"
   ],

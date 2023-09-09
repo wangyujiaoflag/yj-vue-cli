@@ -1,4 +1,4 @@
-# yj-vue-cli
+# bgu-vue-cli
 
 cli（command-line-interface）
 
@@ -8,9 +8,9 @@ cli（command-line-interface）
 
 ```bash
 # 下载脚手架
-npm install yj-vue-cli
+npm install bgu-vue-cli
 # 创建项目
-yj create project-name
+bgu create project-name
 # 运行项目
 npm run dev
 ```
@@ -29,7 +29,7 @@ npm run dev
 - 默认当前文件夹不存在，可以直接创建
 
 - **脚手架流程**
-  - yj create xxx
+  - bgu create xxx
   - 确定当前文件夹是否存在，存在的话是覆盖还是继续创建？❌
   - 选择配置
   - 下载模版
@@ -52,10 +52,10 @@ npm run dev
 
 ```bash
 # 创建目录
-mkdir yj-vue-cli
+mkdir bgu-vue-cli
 
 # 进入目录
-cd yj-vue-cli
+cd bgu-vue-cli
 
 # 初始化
 npm init
@@ -91,7 +91,7 @@ npm install commander chalk inquirer ora download-git-repo figlet @babel/core @b
 npm link
 
 # 执行命令
-yj create xxx
+bgu create xxx
 
 # 发布到npm
 npm publish
